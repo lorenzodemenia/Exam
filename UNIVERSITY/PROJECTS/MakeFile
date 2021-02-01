@@ -1,0 +1,14 @@
+main_iplib: main_iplib.o bmp.o ip_lib.o
+	gcc main_iplib.o bmp.o ip_lib.o -o main_iplib -Wall --ansi --pedantic -lm -g3 -O3 -fsanitize=address -fsanitize=undefined -std=gnu89 -Wextra -g -O1
+#abbiamo aggiunto i flag per il controllo con valgrind
+main_iplib.o: main_iplib.c
+	gcc main_iplib.c -o main_iplib.o -Wall --ansi --pedantic -c -ggdb
+
+bmp.o: bmp.c
+	gcc bmp.c -o bmp.o -Wall -c -lm
+
+ip_lib.o: ip_lib.c
+	gcc ip_lib.c -o ip_lib.o -Wall --ansi --pedantic -c -ggdb
+
+clean:
+	@rm -f main_iplib.o main_iplib bmp.o ip_lib.o
